@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import plotly.express as px
 
 st.write("App Working!")
 
@@ -14,4 +15,9 @@ end_date = df.index.max()
 pick_start = st.sidebar.date_input("Pick Start Date:", beg_date, min_value = beg_date, max_value = end_date)
 pick_end = st.sidebar.date_input("Pick End Date:", end_date, min_value = beg_date, max_value = end_date)
 
-st.write(df.loc[pick_start:pick_end])
+filter_df = df.loc[pick_start:pick_end]
+
+fig = px.line(filter_df, x=filter_df.index, y="Close")
+st.plotly_chart(fig)
+
+st.write(filter_df)
