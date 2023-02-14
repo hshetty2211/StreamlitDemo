@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-st.write("App Working!")
+st.title("Stock Analysis")
 
 tickers = ["AAPL", "CSCO", "DIS", "GE", "GS", "IBM", "JNJ", "JPM", "MCD", "MMM", "NKE", "PG"]
 ticker = st.sidebar.selectbox("Pick a ticker", tickers)
