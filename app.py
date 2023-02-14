@@ -5,7 +5,7 @@ import plotly.express as px
 st.title("Stock Analysis")
 
 tickers = ["AAPL", "CSCO", "DIS", "GE", "GS", "IBM", "JNJ", "JPM", "MCD", "MMM", "NKE", "PG"]
-ticker = st.sidebar.multiselect("Pick a ticker", tickers)
+ticker = st.sidebar.selectbox("Pick a ticker", tickers)
 
 df = pd.read_csv(ticker + ".csv", parse_dates=["Date"], index_col=["Date"])
 
