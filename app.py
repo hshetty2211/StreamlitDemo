@@ -18,6 +18,6 @@ pick_end = st.sidebar.date_input("Pick End Date:", end_date, min_value = beg_dat
 filter_df = df.loc[pick_start:pick_end]
 
 fig = px.line(filter_df, x=filter_df.index, y="Close")
-st.plotly_chart(fig)
+st.plotly_chart(fig, use_container_width=True)
 
-st.write(filter_df, use_container_width=True)
+st.write(filter_df)
