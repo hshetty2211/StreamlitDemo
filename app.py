@@ -7,3 +7,5 @@ tickers = ["AAPL", "CSCO", "DIS", "GE", "GS", "IBM", "JNJ", "JPM", "MCD", "MMM",
 ticker = st.selectbox("Pick a ticker", tickers)
 
 df = pd.read_csv(ticker + ".csv", parse_dates=["Date"])
+
+st.write(df)
