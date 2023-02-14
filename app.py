@@ -20,4 +20,4 @@ filter_df = df.loc[pick_start:pick_end]
 fig = px.line(filter_df, x=filter_df.index, y="Close")
 st.plotly_chart(fig)
 
-st.write(filter_df)
+st.write(filter_df, use_container_width=True)
