@@ -27,10 +27,10 @@ end_time =  st.sidebar.date_input("Pick End Date:")
 #def stock_data(ticker, start_time, end_time):
 
 start_time = datetime.datetime.combine(start_time, datetime.datetime.min.time())
-epoch_start_time = int(start_time.timestamp())
+epoch_start_time = str(int(start_time.timestamp()))
 
 end_time = datetime.datetime.combine(end_time, datetime.datetime.min.time())
-epoch_end_time = int(start_time.timestamp())
+epoch_end_time = str(int(start_time.timestamp()))
     
 url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + "?period1=" + epoch_start_time + "&" + epoch_end_time + "&interval=1d&events=history&includeAdjustedClose=true"
 
