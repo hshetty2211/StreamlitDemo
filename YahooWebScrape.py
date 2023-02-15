@@ -21,8 +21,12 @@ import plotly.express as px
 
 ticker = st.sidebar.text_input("Which stock ticker do you want to analyse?", "AAPL")
 
+today = datetime.date.today()
+one_day = datetime.timedelta(days=1)
+end_date = today - one_day
+
 start_time = st.sidebar.date_input("Pick Start Date:")
-end_time =  st.sidebar.date_input("Pick End Date:")
+end_time =  st.sidebar.date_input("Pick End Date:", end_date)
 
 #def stock_data(ticker, start_time, end_time):
 
