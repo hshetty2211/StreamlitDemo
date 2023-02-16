@@ -78,18 +78,19 @@ stock_prices["Returns"] = stock_prices["Adj Close"].pct_change()
 index_prices["Returns"] = index_prices["Adj Close"].pct_change()
 
 # Merging Data Sets
-mergedData = index_prices.merge(stock_prices, how='inner', left_index=True, right_index=True, preffixes=("Index_","Stock_"))  
-mergedData.dropna(inplace=True)
-mergedData['Date'] = mergedData.index
+merged_data = index_prices.merge(stock_prices, how='inner', left_index=True, right_index=True, suffixes=("_Index","_Stock"))  
+merged_data.dropna(inplace=True)
+
+merged_data['Date'] = merged_data.index
 
 
 # Regression Model
-mergedData['Constant'] = 1 #used to calculate alpha or y-intercept 
-capm = sm.OLS(mergedData['Returns_Stock'], mergedData[['Returns_Index','Constant']])
+merged_data['Constant'] = 1 #used to calculate alpha or y-intercept 
+capm = sm.OLS(merged_data['Returns_Stock'], merged_data[['Returns_Index','Constant']])
 results = capm.fit()
 summary = results.summary() 
 
-mergedData['Predictions'] = results.predict(mergedData[['Returns_Index','Constant']])
+merged_data['Predictions'] = results.predict(merged_data[['Returns_Index','Constant']])
 r2 = results.rsquared
 beta = results.params[0]
 
