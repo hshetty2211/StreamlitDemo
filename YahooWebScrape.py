@@ -76,7 +76,7 @@ fig.add_scatter(x=index_prices.index, y=index_prices["Adj Close"], name="Index P
 
 # update the chart layout and show the chart
 fig.update_layout(title="Stock and Index Prices", xaxis_title="Date", yaxis_title="Adj Close", legend_title="Price Type")
-fig.show()
+st.plotly_chart(fig, use_container_width = True)
 
 # Calculate Returns and fit regression model
 stock_prices["Returns"] = stock_prices["Adj Close"].pct_change()
