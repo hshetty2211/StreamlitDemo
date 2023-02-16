@@ -78,9 +78,7 @@ stock_prices["Returns"] = stock_prices["Adj Close"].pct_change()
 index_prices["Returns"] = index_prices["Adj Close"].pct_change()
 
 # Merging Data Sets
-mergedData = index_prices.merge(stock_prices, how='inner',
-                         left_index=True, right_index=True,
-                         preffixes=("Index_","Stock_"))  
+mergedData = index_prices.merge(stock_prices, how='inner', left_index=True, right_index=True, preffixes=("Index_","Stock_"))  
 mergedData.dropna(inplace=True)
 mergedData['Date'] = mergedData.index
 
