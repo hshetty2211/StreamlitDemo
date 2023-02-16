@@ -70,7 +70,8 @@ index_prices = index_data[["Date","Adj Close"]]
 index_prices = index_prices.set_index("Date")
 
 # Plot price data
-fig = px.line(stock_prices, x=stock_prices.index, y="Adj Close")
+fig = px.line(stock_prices, x=stock_prices.index, y="Adj Close", color = "Blue")
+fig = px.line(index_prices, x=index_prices.index, y="Adj Close", color = "Orange")
 st.plotly_chart(fig, use_container_width = True)
 
 # Calculate Returns and fit regression model
