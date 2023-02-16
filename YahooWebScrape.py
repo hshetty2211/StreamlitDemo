@@ -21,6 +21,9 @@ import plotly.express as px
 
 #%% Web Scrape
 
+# Title
+st.title("Stock Analysis")
+
 # Select Ticker
 ticker = st.sidebar.text_input("Which stock ticker do you want to analyse?", "GOOG")
 
