@@ -80,8 +80,8 @@ fig.update_layout(title="Stock and Index Prices",
                   yaxis_title="Stock Prices",
                   yaxis2_title="Index Prices",
                   legend_title="Price Type",
-                  yaxis=dict(title="Stock Prices", anchor="free", overlaying="y2", side="left", position=0.1),
-                  yaxis2=dict(title="Index Prices", anchor="free", overlaying="y", side="right", position=0.9))
+                  yaxis=dict(title="Stock Prices", anchor="free", overlaying="y2", side="left"),
+                  yaxis2=dict(title="Index Prices", anchor="free", overlaying="y", side="right"))
 
 st.plotly_chart(fig, use_container_width = True)
 
