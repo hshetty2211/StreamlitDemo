@@ -70,20 +70,10 @@ index_prices = index_data[["Date","Adj Close"]]
 index_prices = index_prices.set_index("Date")
 
 # Plot price data
-fig = px.line()
-fig.add_scatter(x=stock_prices.index, y=stock_prices["Adj Close"], name="Stock Prices")
-fig.add_scatter(x=index_prices.index, y=index_prices["Adj Close"], name="Index Prices", yaxis = "y2")
-
-# update the chart layout and show the chart
-fig.update_layout(title="Stock and Index Prices", 
-                  xaxis_title="Date",
-                  yaxis_title="Stock Prices",
-                  yaxis2_title="Index Prices",
-                  legend_title="Price Type",
-                  yaxis=dict(title="Stock Prices", anchor="free", overlaying="y2", side="left", position=0.1),
-                  yaxis2=dict(title="Index Prices", anchor="free", overlaying="y", side="right", position=0.9))
-
+fig = px.line(stock_prices, x=stock_prices.index, y="Adj Close", color_discrete_sequence = ["blue"])
+fig2 = px.line(index_prices, x=index_prices.index, y="Adj Close", color_discrete_sequence = ["orange"])
 st.plotly_chart(fig, use_container_width = True)
+st.plotly_chart(fig2, use_container_width = True)
 
 # Calculate Returns and fit regression model
 stock_prices["Returns"] = stock_prices["Adj Close"].pct_change()
