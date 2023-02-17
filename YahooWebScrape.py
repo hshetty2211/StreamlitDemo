@@ -85,30 +85,30 @@ merged_data['Date'] = merged_data.index
 merged_data = merged_data.drop(['Date'], axis = 1)
 
 
-"""# Plotting
+# Plotting
 # create a figure with two y-axes
-fig, ax1 = plt.subplots()
-ax2 = ax1.twinx()
+#fig, ax1 = plt.subplots()
+#x2 = ax1.twinx()
 
 # plot the first line chart on the primary y-axis
-ax1.plot(merged_data,index, merged_data["Adj Close_Stock"], color="blue", label="Stock Prices")
-ax1.set_xlabel("Date")
-ax1.set_ylabel("Stock Prices", color="blue")
-ax1.tick_params(axis="y", labelcolor="blue")
+#ax1.plot(merged_data,index, merged_data["Adj Close_Stock"], color="blue", label="Stock Prices")
+#ax1.set_xlabel("Date")
+#ax1.set_ylabel("Stock Prices", color="blue")
+#ax1.tick_params(axis="y", labelcolor="blue")
 
 # plot the second line chart on the secondary y-axis
-ax2.plot(merged_data.index, merged_data["Adj Close_Index"], color="orange", label="Index Prices")
-ax2.set_ylabel("Index Prices", color="orange")
-ax2.tick_params(axis="y", labelcolor="orange")
+#ax2.plot(merged_data.index, merged_data["Adj Close_Index"], color="orange", label="Index Prices")
+#ax2.set_ylabel("Index Prices", color="orange")
+#ax2.tick_params(axis="y", labelcolor="orange")
 
 # add legend
-lines, labels = ax1.get_legend_handles_labels()
-lines2, labels2 = ax2.get_legend_handles_labels()
-ax2.legend(lines + lines2, labels + labels2, loc="upper left")
+#lines, labels = ax1.get_legend_handles_labels()
+#lines2, labels2 = ax2.get_legend_handles_labels()
+#ax2.legend(lines + lines2, labels + labels2, loc="upper left")
 
 # set chart title and display the chart
-plt.title("Stock and Index Prices")
-st.pyplot(fig)"""
+#plt.title("Stock and Index Prices")
+#st.pyplot(fig)"""
 
 # Regression Model
 merged_data['Constant'] = 1 #used to calculate alpha or y-intercept 
