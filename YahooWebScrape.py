@@ -23,8 +23,8 @@ import plotly.express as px
 
 # Select Ticker & Index
 ticker = st.sidebar.text_input("Which stock ticker do you want to analyse?", "GOOG", placeholder = 'Please input stock ticker in ALL CAPS')
-index = st.sidebar.text_input("Which index do you want to compare to?", "GSPC")
-st.sidebar.text('Please input index ticker in ALL CAPS')
+index = st.sidebar.text_input("Which index do you want to compare to?", "GSPC", placeholder = 'Please input index ticker in ALL CAPS')
+
 
 # Select Date Range
 
