@@ -13,18 +13,19 @@ Date: Feb 2023
 import pandas as pd
 import requests
 import streamlit as st
+import matplotlib.pyplot as plt
 import datetime
 import time
 import math 
 import statsmodels.api as sm
-import plotly.express as px
 
 #%% Web Scrape
 
 # Select Ticker & Index
-ticker = st.sidebar.text_input("Which stock ticker do you want to analyse?", "GOOG", placeholder = 'Please input stock ticker in ALL CAPS')
-index = st.sidebar.text_input("Which index do you want to compare to?", "GSPC", placeholder = 'Please input index ticker in ALL CAPS')
-
+ticker = st.sidebar.text_input("Which stock ticker do you want to analyse?", "GOOG")
+st.sidebar.text('Please input stock ticker in ALL CAPS')
+index = st.sidebar.text_input("Which index do you want to compare to?", "GSPC")
+st.sidebar.text('Please input index ticker in ALL CAPS')
 
 # Select Date Range
 
@@ -69,10 +70,10 @@ index_prices = index_data[["Date","Adj Close"]]
 index_prices = index_prices.set_index("Date")
 
 # Plot price data
-fig = px.line(stock_prices, x=stock_prices.index, y="Adj Close", color_discrete_sequence = ["blue"])
-fig2 = px.line(index_prices, x=index_prices.index, y="Adj Close", color_discrete_sequence = ["orange"])
-st.plotly_chart(fig, use_container_width = True)
-st.plotly_chart(fig2, use_container_width = True)
+#fig = px.line(stock_prices, x=stock_prices.index, y="Adj Close", color_discrete_sequence = ["blue"])
+#fig2 = px.line(index_prices, x=index_prices.index, y="Adj Close", color_discrete_sequence = ["orange"])
+#st.plotly_chart(fig, use_container_width = True)
+#st.plotly_chart(fig2, use_container_width = True)
 
 # Calculate Returns and fit regression model
 stock_prices["Returns"] = stock_prices["Adj Close"].pct_change()
@@ -83,21 +84,44 @@ merged_data = index_prices.merge(stock_prices, how='inner', left_index=True, rig
 merged_data.dropna(inplace=True)
 
 merged_data['Date'] = merged_data.index
+merged_data = merged_data.drop(['Date'], axis = 1)
 
+
+# Plotting
+# create a figure with two y-axes
+fig, ax1 = plt.subplots()
+ax2 = ax1.twinx()
+
+# plot the first line chart on the primary y-axis
+ax1.plot(merged_data,index, merged_data["Adj Close_Stock"], color="blue", label="Stock Prices")
+ax1.set_xlabel("Date")
+ax1.set_ylabel("Stock Prices", color="blue")
+ax1.tick_params(axis="y", labelcolor="blue")
+
+# plot the second line chart on the secondary y-axis
+ax2.plot(merged_data.index, merged_data["Adj Close_Index"], color="orange", label="Index Prices")
+ax2.set_ylabel("Index Prices", color="orange")
+ax2.tick_params(axis="y", labelcolor="orange")
+
+# add legend
+lines, labels = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax2.legend(lines + lines2, labels + labels2, loc="upper left")
+
+# set chart title and display the chart
+plt.title("Stock and Index Prices")
+st.pyplot(fig)
 
 # Regression Model
 merged_data['Constant'] = 1 #used to calculate alpha or y-intercept 
 capm = sm.OLS(merged_data['Returns_Stock'], merged_data[['Returns_Index','Constant']])
 results = capm.fit()
-summary = results.summary() 
 
-merged_data['Predictions'] = results.predict(merged_data[['Returns_Index','Constant']])
-r2 = results.rsquared
-beta = results.params[0]
-
-# Regression Visualizations
-chartTitle = "Linear Regression {} vs {}".format(ticker, index)
-subTitle = "R2:{:.4f} Beta:{:.4f}".format(r2, beta)
-fullTitle = "{} <br><sup>{}</sup>".format(chartTitle, subTitle)
-xAxisTitle = "{} Returns".format(index)
-yAxisTitle = "{} Returns".format(ticker)
+# Output the regression result as a dataframe in Streamlit
+st.write("CAPM Regression Result")
+result = pd.DataFrame({"Coefficient": [capm.params[0], capm.params[1]],
+                       "Std. Error": [capm.bse[0], capm.bse[1]],
+                       "t-value": [capm.tvalues[0], capm.tvalues[1]],
+                       "p-value": [capm.pvalues[0], capm.pvalues[1]]},
+                      index=["Intercept", "Beta"])
+st.write(result)
