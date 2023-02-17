@@ -27,7 +27,7 @@ ticker = st.sidebar.text_input("Which stock ticker do you want to analyse?", "GO
 index = st.sidebar.text_input("Which index do you want to compare to?", "GSPC", placeholder = 'Please input index ticker in ALL CAPS')
 
 # Title
-st.title("Stock Analysis of"+ ticker)
+st.title("Stock Analysis of "+ ticker + " v/s " + index)
 
 # Select Date Range
 
