@@ -112,8 +112,7 @@ st.pyplot(fig)"""
 
 # Regression Model
 merged_data['Constant'] = 1 #used to calculate alpha or y-intercept 
-capm = sm.OLS(merged_data['Returns_Stock'], merged_data[['Returns_Index','Constant']])
-results = capm.fit()
+capm = sm.OLS(merged_data['Returns_Stock'], merged_data[['Returns_Index','Constant']]).fit()
 
 # Output the regression result as a dataframe in Streamlit
 st.write("CAPM Regression Result")
