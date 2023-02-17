@@ -85,7 +85,7 @@ merged_data['Date'] = merged_data.index
 merged_data = merged_data.drop(['Date'], axis = 1)
 
 
-# Plotting
+"""# Plotting
 # create a figure with two y-axes
 fig, ax1 = plt.subplots()
 ax2 = ax1.twinx()
@@ -108,7 +108,7 @@ ax2.legend(lines + lines2, labels + labels2, loc="upper left")
 
 # set chart title and display the chart
 plt.title("Stock and Index Prices")
-st.pyplot(fig)
+st.pyplot(fig)"""
 
 # Regression Model
 merged_data['Constant'] = 1 #used to calculate alpha or y-intercept 
